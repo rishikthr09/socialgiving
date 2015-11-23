@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<p> Hey there!, your item <b> {{item.name}}</b> has {{ item.messages|count }} messages. </p>
+
+<div class="accordion" id="accordion2">
+	{% for id in user_messages %}
+
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{id}}">
+				<h3>Conversation with <b>{{id_to_user[id]}}</b></h3>
+			</a>
+		</div>
+		<div id="collapse{{id}}" class="accordion-body collapse in">
+			<div class="accordion-inner">
+				{% for msg in user_messages[id] %}
+				<li> {{msg.message}} - <b>{% if user.id != msg.from_id %}{{id_to_user[msg.from_id]}}{% else %}You{% endif %}</b></li>
+				{% endfor %}<br/>
+				<a href="/viewusermessages?p={{item.id}}&u={{id}}" class="btn btn-primary">New Message</a><br/><br/>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

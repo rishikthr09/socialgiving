@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Post Request for {{item.name}} </h1>
+<form action="" method="post" name="postrequest">
+	{{ form.csrf_token }}
+	<p>
+	Info:<br>
+	{{ form.info }}<br>
+	{% for error in form.info.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+	</p>
+	<p><input type="submit" value="Post Request"></p>
+</form>
+{% endblock %}

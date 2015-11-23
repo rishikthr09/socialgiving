@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3> Messages for the item - {{item.name}} from {{requester.name}}</h3>
+
+<ul>
+{% for msg in message_list %}
+<li><b>{{ msg.message }}</b> - From {% if msg.from_id==current_user.id %}You{% else %}{{requester.name}}{% endif %}</li>
+{% endfor %}
+</ul>
+
+<form action="" method="post" name="postmessage">
+	{{ form.csrf_token }}
+
+	New Message:<br>
+	{{ form.message }}<br>
+	{% for error in form.message.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+
+	<p><input type="submit" value="Send Message"></p>
+</form>
+{% endblock %}

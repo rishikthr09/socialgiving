@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+</script>
+
+<body>
+<h1>Flask Google Maps Example</h1>
+
+<h2> Google Dev Bus - Rua Quatá, 255 </h2>
+{% with %}
+
+    {% set location=(-23.599097,-46.675903) %}
+    {% set style="width:500px;height:500px;"%}
+
+    {{
+    googlemap(
+        "simple-map",
+        location.0, location.1,
+        markers=[location,],
+        style=style
+        )
+    }}
+
+{% endwith %}
+</body>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Register</h1>
+<form action="" method="post" name="register">
+	{{ form.csrf_token }}
+	<p>
+	Name:<br>
+	{{ form.name }}<br>
+	{% for error in form.name.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+	E-Mail Address:<br>
+	{{ form.email }}<br>
+	{% for error in form.email.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+	Password:<br>
+	{{ form.password }}<br>
+	{% for error in form.password.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+	Confirm Password:<br>
+	{{ form.repeat_password }}<br>
+	{% for error in form.repeat_password.errors %}
+	<span style="color: red;">[{{ error }}]</span>
+	{% endfor %}<br>
+
+	<p><input type="submit" value="Sign In"></p>
+</form>
+{% endblock %}
